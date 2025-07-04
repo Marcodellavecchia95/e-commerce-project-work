@@ -28,7 +28,7 @@ export default function Navbar() {
                 alt="Apri menù"
                 className="navlink-component-image-plus"
               />
-              <Link>Products</Link>
+              <Link to={"/products"}>Products</Link>
             </div>
             <div className="navbar-navlink-component">
               <img
@@ -42,17 +42,6 @@ export default function Navbar() {
 
           {/* sezione carrello */}
           <div className="navbar-order-section">
-            <form>
-              <input type="text" placeholder="Search..." name="search" />
-              <button type="submit" className="btn" id="btn-search">
-                <img
-                  src="src/assets/img/buttons/btn-search.png"
-                  alt="Search"
-                  id="search-icon"
-                />
-              </button>
-            </form>
-
             <Link to="/">
               <button className="btn" id="btn-cart">
                 <img
