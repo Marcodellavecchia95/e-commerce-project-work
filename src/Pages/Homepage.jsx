@@ -94,6 +94,7 @@ export default function Homepage() {
             recentProducts.map((bestSellerProduct) => {
               return (
                 <Card
+                  key={bestSellerProduct.id}
                   title="Nome della sezione"
                   bottomMessage="Don't shut down your
                   monitor!"
@@ -149,6 +150,7 @@ export default function Homepage() {
             bestSellerProducts.map((bestSellerProduct) => {
               return (
                 <Card
+                  key={bestSellerProduct.id}
                   title="Nome della sezione"
                   bottomMessage="Don't shut down your
                   monitor!"
