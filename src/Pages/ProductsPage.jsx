@@ -5,13 +5,26 @@ import Card from "../components/card/Card";
 
 export default function ProductsPage() {
   const productsApi = "http://localhost:3000/products";
+  const searchApi = "http://localhost:3000/products/search";
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
 
-  const fetchProducts = () => {
-    axios.get(productsApi).then((res) => {
-      setProducts(res.data);
-    });
+  const fetchProducts = (searchTerm = "") => {
+    axios
+      .get(searchApi, { params: { search: searchTerm } })
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.error("Errore fetch prodotti:", err);
+      });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchProducts(search);
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -19,8 +32,14 @@ export default function ProductsPage() {
   return (
     <>
       <div>
-        <form>
-          <input type="text" placeholder="Search..." name="search" />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Search..."
+            name="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
           <button type="submit" className="btn" id="btn-search">
             <img
               src="src/assets/img/buttons/btn-search.png"
