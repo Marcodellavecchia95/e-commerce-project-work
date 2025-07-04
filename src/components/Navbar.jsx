@@ -20,7 +20,7 @@ export default function Navbar() {
                 alt="Apri menù"
                 className="navlink-component-image-plus"
               />
-              <Link>Homepage</Link>
+              <Link to={"/"}>Homepage</Link>
             </div>
             <div className="navbar-navlink-component">
               <img

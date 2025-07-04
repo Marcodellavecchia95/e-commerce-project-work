@@ -4,7 +4,6 @@ import axios from "axios";
 import Card from "../components/card/Card";
 
 export default function ProductsPage() {
-  const productsApi = "http://localhost:3000/products";
   const searchApi = "http://localhost:3000/products/search";
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
