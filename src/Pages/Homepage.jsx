@@ -1,7 +1,33 @@
 import { Link } from "react-router";
 import Card from "../components/card/Card";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Homepage() {
+  const recentProductsApi = "http://localhost:3000/products/recent";
+  const bestSellerProductsApi = "http://localhost:3000/products/best-sellers";
+  const [recentProducts, setRecentProducts] = useState([]);
+  const [bestSellerProducts, setBestSellerProducts] = useState([]);
+
+  const fetchRecentProducts = () => {
+    axios.get(recentProductsApi).then((res) => {
+      setRecentProducts(res.data);
+      console.log(res.data);
+    });
+  };
+
+  const fetchBestSellerProducts = () => {
+    axios.get(bestSellerProductsApi).then((res) => {
+      setBestSellerProducts(res.data);
+      console.log(res.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchRecentProducts();
+    fetchBestSellerProducts();
+  }, []);
+
   return (
     <main>
       {/* MAIN */}
@@ -37,32 +63,142 @@ export default function Homepage() {
         title="Nome della sezione"
         bottomMessage="Don't shut down your monitor!"
       >
-        <div className="flex featured-container">
-          <div className="featured-info">
-            <h3>MARCA</h3>
-            <h1>NOME PRODOTTO LUNGO</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-              maxime iste inventore, laudantium quaerat ipsum sed libero est
-              quis, tempora laboriosam distinctio voluptatem dolorum beatae
-              tenetur doloremque eveniet, eum dicta.
-            </p>
-            <h4>
-              000€ <span> 111€</span>
-            </h4>
-          </div>
-          <div className="featured-image">
-            <div className="featured-image-content flex">
-              <p>-20%</p>
-              <img
-                src="src/assets/img/products/product-headphone.png"
-                alt="Product Headphone"
-                id="featured-product-image"
-              />
+        {recentProducts[0] && (
+          <div className="flex featured-container">
+            <div className="featured-info">
+              <h1>{recentProducts[0].name}</h1>
+              <p>{recentProducts[0].description}</p>
+              <h4>
+                {recentProducts[0].price}{" "}
+                <span> {recentProducts[0].promotion_price}</span>
+              </h4>
+            </div>
+            <div className="featured-image">
+              <div className="featured-image-content flex">
+                <p>-50.00€</p>
+                <img
+                  src={recentProducts[0].thumbnail_url}
+                  alt="Product Headphone"
+                  id="featured-product-image"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </Card>
+
+      <div className="container">
+        <section>
+          <h2>Più Recenti</h2>
+          {recentProducts[0] &&
+            recentProducts.map((bestSellerProduct) => {
+              return (
+                <Card
+                  title="Nome della sezione"
+                  bottomMessage="Don't shut down your
+                  monitor!"
+                >
+                  {bestSellerProduct && (
+                    <div className="flex featured-container">
+                      <div className="featured-info">
+                        <h1>{bestSellerProduct.name}</h1>
+                        <p>{bestSellerProduct.description}</p>
+                        <h4>
+                          {bestSellerProduct.promotion_price > 0 &&
+                          bestSellerProduct.promotion_price <
+                            bestSellerProduct.price ? (
+                            <>
+                              {bestSellerProduct.price}€
+                              <span>{bestSellerProduct.promotion_price}€</span>
+                            </>
+                          ) : (
+                            <>{bestSellerProduct.price}€</>
+                          )}
+                        </h4>
+                      </div>
+                      <div className="featured-image">
+                        <div className="featured-image-content flex">
+                          {bestSellerProduct.promotion_price > 0 &&
+                            bestSellerProduct.promotion_price <
+                              bestSellerProduct.price && (
+                              <p>
+                                -
+                                {(
+                                  bestSellerProduct.price -
+                                  bestSellerProduct.promotion_price
+                                ).toFixed(2)}
+                                €
+                              </p>
+                            )}
+                          <img
+                            src={bestSellerProduct.thumbnail_url}
+                            alt="Product Headphone"
+                            id="featured-product-image"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </Card>
+              );
+            })}
+        </section>
+        <section>
+          <h2>Più Venduti</h2>
+          {bestSellerProducts[0] &&
+            bestSellerProducts.map((bestSellerProduct) => {
+              return (
+                <Card
+                  title="Nome della sezione"
+                  bottomMessage="Don't shut down your
+                  monitor!"
+                >
+                  {bestSellerProduct && (
+                    <div className="flex featured-container">
+                      <div className="featured-info">
+                        <h1>{bestSellerProduct.name}</h1>
+                        <p>{bestSellerProduct.description}</p>
+                        <h4>
+                          {bestSellerProduct.promotion_price > 0 &&
+                          bestSellerProduct.promotion_price <
+                            bestSellerProduct.price ? (
+                            <>
+                              {bestSellerProduct.price}€
+                              <span>{bestSellerProduct.promotion_price}€</span>
+                            </>
+                          ) : (
+                            <>{bestSellerProduct.price}€</>
+                          )}
+                        </h4>
+                      </div>
+                      <div className="featured-image">
+                        <div className="featured-image-content flex">
+                          {bestSellerProduct.promotion_price > 0 &&
+                            bestSellerProduct.promotion_price <
+                              bestSellerProduct.price && (
+                              <p>
+                                -
+                                {(
+                                  bestSellerProduct.price -
+                                  bestSellerProduct.promotion_price
+                                ).toFixed(2)}
+                                €
+                              </p>
+                            )}
+                          <img
+                            src={bestSellerProduct.thumbnail_url}
+                            alt="Product Headphone"
+                            id="featured-product-image"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </Card>
+              );
+            })}
+        </section>
+      </div>
     </main>
   );
 }
