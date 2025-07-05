@@ -1,5 +1,6 @@
-import { Link } from "react-router";
-import Card from "../components/card/Card";
+import { Link } from "react-router-dom";
+
+import Card from "../components/Card/Card";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -72,6 +73,13 @@ export default function Homepage() {
                 {recentProducts[0].price}{" "}
                 <span> {recentProducts[0].promotion_price}</span>
               </h4>
+
+              <Link
+                to={`/products/${recentProducts[0].id}`}
+                className="btn-detail"
+              >
+                Scopri di più →
+              </Link>
             </div>
             <div className="featured-image">
               <div className="featured-image-content flex">
@@ -98,6 +106,7 @@ export default function Homepage() {
                   title="Nome della sezione"
                   bottomMessage="Don't shut down your
                   monitor!"
+                  linkTo={`/products/${bestSellerProduct.id}`}
                 >
                   {bestSellerProduct && (
                     <div className="flex featured-container">
@@ -116,6 +125,12 @@ export default function Homepage() {
                             <>{bestSellerProduct.price}€</>
                           )}
                         </h4>
+                        <Link
+                          to={`/products/${bestSellerProduct.id}`}
+                          className="btn-detail"
+                        >
+                          Scopri di più →
+                        </Link>
                       </div>
                       <div className="featured-image">
                         <div className="featured-image-content flex">

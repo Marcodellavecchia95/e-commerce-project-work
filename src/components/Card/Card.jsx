@@ -1,4 +1,6 @@
-export default function Card({ title, children, bottomMessage }) {
+import { Link } from "react-router-dom";
+
+export default function Card({ title, children, bottomMessage, linkTo }) {
   return (
     <div className="website-card container">
       {/* TOP BAR */}
@@ -16,7 +18,18 @@ export default function Card({ title, children, bottomMessage }) {
       </div>
 
       {/* CONTENT */}
-      <div className="website-card-content">{children}</div>
+      <div className="website-card-content">
+        {linkTo ? (
+          <Link
+            to={linkTo}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            {children}
+          </Link>
+        ) : (
+          children
+        )}
+      </div>
 
       {/* BOTTOM BAR */}
       <div className="website-card-bottom flex">

@@ -1,7 +1,8 @@
-import { useState, useEffect, use } from "react";
-import { Link } from "react-router";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import axios from "axios";
-import Card from "../components/card/Card";
+import Card from "../components/Card/Card";
 
 export default function ProductsPage() {
   const searchApi = "http://localhost:3000/products/search";
