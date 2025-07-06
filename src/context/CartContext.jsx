@@ -3,36 +3,7 @@ import { createContext, useState, useContext } from "react";
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      name: "Esempio Prodotto",
-      thumbnail: "https://via.placeholder.com/150",
-      price: 19.99,
-      quantity: 1,
-    },
-    {
-      id: 1,
-      name: "Esempio Prodotto",
-      thumbnail: "https://via.placeholder.com/150",
-      price: 19.99,
-      quantity: 1,
-    },
-    {
-      id: 1,
-      name: "Esempio Prodotto",
-      thumbnail: "https://via.placeholder.com/150",
-      price: 19.99,
-      quantity: 1,
-    },
-    {
-      id: 1,
-      name: "Esempio Prodotto",
-      thumbnail: "https://via.placeholder.com/150",
-      price: 19.99,
-      quantity: 1,
-    },
-  ]);
+  const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
     setCart((prev) => {
@@ -55,9 +26,17 @@ export function CartProvider({ children }) {
 
   const clearCart = () => setCart([]);
 
+  const updateQuantity = (id, newQuantity) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, clearCart }}
+      value={{ cart, addToCart, removeFromCart, clearCart, updateQuantity }}
     >
       {children}
     </CartContext.Provider>
