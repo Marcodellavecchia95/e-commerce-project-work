@@ -5,7 +5,7 @@ import CartSummary from "../components/Cart/CartSummary";
 import "../assets/css/CartPage.css";
 
 export default function CartPage() {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const { cart, removeFromCart, updateQuantity } = useContext(CartContext);
   return (
     <main>
       <div className="cart-wrapper">
@@ -15,7 +15,11 @@ export default function CartPage() {
             <>
               <div className="cart-row">
                 <div className="col-75">
-                  <CartItems cart={cart} removeFromCart={removeFromCart} />
+                  <CartItems
+                    cart={cart}
+                    removeFromCart={removeFromCart}
+                    updateQuantity={updateQuantity}
+                  />
                 </div>
                 <div className="col-20">
                   <CartSummary cart={cart} />
