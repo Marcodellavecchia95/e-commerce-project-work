@@ -5,8 +5,8 @@ import Navbar from "./components/Navbar";
 import ProductDetailPage from "./pages/ProductDetailPage.jsx";
 import { CartProvider } from "../src/context/CartContext";
 import CartPage from "./Pages/CartPage.jsx";
-import CheckoutForm from "./assets/components/checkout/CheckoutForm";
-import ReturnPage from "./assets/components/checkout/ReturnPage";
+import CheckoutForm from "./components/checkout/CheckoutForm.jsx";
+import ReturnPage from "./components/checkout/ReturnPage.jsx";
 
 export default function App() {
   return (

@@ -30,6 +30,7 @@ body {
   background-image: url("src/assets/img/wallpaper/xp-wallpaper.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
 }
 
 /* PARAMS */
