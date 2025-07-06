@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Homepage from "./Pages/Homepage";
-import ProductsPage from "./pages/ProductsPage";
+import Homepage from "./pages/Homepage.jsx";
+import ProductsPage from "./pages/ProductsPage.jsx";
 import Navbar from "./components/Navbar";
-import ProductDetailPage from "./pages/ProductDetailPage";
-import { CartProvider } from "../src/context/cartContext";
+import ProductDetailPage from "./pages/ProductDetailPage.jsx";
+import { CartProvider } from "../src/context/CartContext";
+import CartPage from "./pages/CartPage.jsx";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </BrowserRouter>
     </CartProvider>

@@ -28,7 +28,7 @@ body {
   /* background-color: var(--bkg-color); */
 
   background-image: url("src/assets/img/wallpaper/xp-wallpaper.jpg");
-  background-repeat: repeat-y;
+  background-repeat: no-repeat;
   background-size: cover;
 }
 
