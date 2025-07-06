@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import ProductDetailPage from "./pages/ProductDetailPage.jsx";
 import { CartProvider } from "../src/context/CartContext";
 import CartPage from "./Pages/CartPage.jsx";
+import CheckoutForm from "./assets/components/checkout/CheckoutForm";
+import ReturnPage from "./assets/components/checkout/ReturnPage";
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutForm />} />
+          <Route path="/return" element={<ReturnPage />} />
         </Routes>
       </BrowserRouter>
     </CartProvider>
