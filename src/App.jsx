@@ -4,7 +4,7 @@ import ProductsPage from "./pages/ProductsPage.jsx";
 import Navbar from "./components/Navbar";
 import ProductDetailPage from "./pages/ProductDetailPage.jsx";
 import { CartProvider } from "../src/context/CartContext";
-import CartPage from "./pages/CartPage.jsx";
+import CartPage from "./Pages/CartPage.jsx";
 
 export default function App() {
   return (

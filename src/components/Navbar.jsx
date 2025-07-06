@@ -42,7 +42,7 @@ export default function Navbar() {
 
           {/* sezione carrello */}
           <div className="navbar-order-section">
-            <Link to="/">
+            <Link to="/cart">
               <button className="btn" id="btn-cart">
                 <img
                   src="src/assets/img/menu_icons/menu-cart.png"
