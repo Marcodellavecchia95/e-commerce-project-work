@@ -15,7 +15,7 @@ export default function CartPage() {
             <>
               <div className="cart-row">
                 <div className="col-75">
-                  <CartItems cart={cart} />
+                  <CartItems cart={cart} removeFromCart={removeFromCart} />
                 </div>
                 <div className="col-20">
                   <CartSummary cart={cart} />
