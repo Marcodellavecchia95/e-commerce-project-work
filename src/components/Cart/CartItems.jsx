@@ -5,7 +5,7 @@ export default function CartItems({ cart, removeFromCart, updateQuantity }) {
         return (
           <div className="cart-card">
             <img
-              src={item.thumbnail_url}
+              src={item.thumbnail}
               alt={item.name}
               className="card-img-top"
             />
