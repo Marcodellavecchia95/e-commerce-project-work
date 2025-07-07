@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Homepage from "./pages/Homepage.jsx";
-import ProductsPage from "./pages/ProductsPage.jsx";
+import Homepage from "./Pages/Homepage.jsx";
+import ProductsPage from "./Pages/ProductsPage.jsx";
 import Navbar from "./components/Navbar";
-import ProductDetailPage from "./pages/ProductDetailPage.jsx";
+import ProductDetailPage from "./Pages/ProductDetailPage.jsx";
 import { CartProvider } from "../src/context/CartContext";
 import CartPage from "./Pages/CartPage.jsx";
 import CheckoutForm from "./components/checkout/CheckoutForm.jsx";
