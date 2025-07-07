@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: "TahomaXP";
-  src: url("src/assets/fonts/windows-xp-tahoma.otf") format("opentype");
+  src: url("/assets/fonts/windows-xp-tahoma.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -17,6 +17,8 @@
 .container {
   max-width: 1080px;
   margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .flex {
@@ -27,10 +29,11 @@
 body {
   /* background-color: var(--bkg-color); */
 
-  background-image: url("src/assets/img/wallpaper/xp-wallpaper.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
+  background-image: url("/assets/img/wallpaper/xp-wallpaper.jpg");
+  background-attachment: fixed;
+  background-position: top center;
+  background-size: auto 100vw;
+  min-height: 100vh;
 }
 
 /* PARAMS */
@@ -76,7 +79,7 @@ a:hover {
 
 .image-border {
   display: inline-block;
-  padding: 10px;
+  padding: 26px;
   border: 1px solid rgb(216, 216, 216);
 }
 
@@ -99,13 +102,14 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
+  margin-bottom: 1rem;
 }
 
 .navbar-container {
-  background-color: var(--bkg-color);
-  border-bottom: 2px solid var(--border-card-color);
+  background-color: white;
   position: sticky;
   top: 0;
+  z-index: 9999;
 }
 
 .navlink-component-image-plus {
@@ -147,13 +151,13 @@ form {
 .btn {
   background-color: #ffffff;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
   box-shadow: 1px 1px 1px #bababa;
-  padding: 7px 15px;
+  padding: 4px 10px;
   image-rendering: pixelated;
+  display: block;
 
   /* font */
-  font-size: 10px;
+  font-size: 20px;
   font-weight: 200;
 }
 
@@ -215,60 +219,16 @@ header h1 span {
   width: 400px;
   padding-bottom: 2rem;
   image-rendering: pixelated;
-  animation: shake-logo-header 3s ease 2s infinite normal forwards;
-}
-
-/* ANIMATION logo header */
-@keyframes shake-logo-header {
-  0% {
-    transform: translate(0);
-  }
-
-  10% {
-    transform: translate(-2px, -2px);
-  }
-
-  20% {
-    transform: translate(2px, -2px);
-  }
-
-  30% {
-    transform: translate(-2px, 2px);
-  }
-
-  40% {
-    transform: translate(2px, 2px);
-  }
-
-  50% {
-    transform: translate(-2px, -2px);
-  }
-
-  60% {
-    transform: translate(2px, -2px);
-  }
-
-  70% {
-    transform: translate(-2px, 2px);
-  }
-
-  80% {
-    transform: translate(-2px, -2px);
-  }
-
-  90% {
-    transform: translate(2px, -2px);
-  }
-
-  100% {
-    transform: translate(0);
-  }
 }
 
 #header-explore {
   padding-top: 2rem;
   padding-bottom: 3rem;
   color: white;
+}
+
+#header-explore p {
+  font-size: 20px;
 }
 
 #header-explore img {
@@ -286,6 +246,8 @@ header h1 span {
   border-top-right-radius: 9.5px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+
+  margin-bottom: 2rem;
 }
 
 .website-card-top {
@@ -320,6 +282,7 @@ header h1 span {
 .website-card-content {
   padding: 0.7rem 0.7rem;
   background-color: white;
+  font-size: 20px;
 }
 
 /* CARD BOTTOM */
@@ -338,5 +301,12 @@ header h1 span {
 }
 
 .website-card-bottom p {
-  font-size: 16px;
+  font-size: 20px;
+}
+
+/* RESPONSIVE SMALLER SCREEN */
+@media (max-width: 800px) {
+  header {
+    flex-direction: column;
+  }
 }

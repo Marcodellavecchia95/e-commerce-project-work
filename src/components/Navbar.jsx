@@ -9,14 +9,14 @@ export default function Navbar() {
           <div className="navbar-website-section">
             <Link to="/">
               <img
-                src="src/assets/img/logos/logo-ror.png"
+                src="/assets/img/logos/logo-ror.png"
                 alt="Logo"
                 id="navbar-logo"
               />
             </Link>
             <div className="navbar-navlink-component">
               <img
-                src="src/assets/img/menu_icons/menu-plus.png"
+                src="/assets/img/menu_icons/menu-plus.png"
                 alt="Apri menù"
                 className="navlink-component-image-plus"
               />
@@ -24,7 +24,7 @@ export default function Navbar() {
             </div>
             <div className="navbar-navlink-component">
               <img
-                src="src/assets/img/menu_icons/menu-plus.png"
+                src="/assets/img/menu_icons/menu-plus.png"
                 alt="Apri menù"
                 className="navlink-component-image-plus"
               />
@@ -32,7 +32,7 @@ export default function Navbar() {
             </div>
             <div className="navbar-navlink-component">
               <img
-                src="src/assets/img/menu_icons/menu-plus.png"
+                src="/assets/img/menu_icons/menu-plus.png"
                 alt="Apri menù"
                 className="navlink-component-image-plus"
               />
@@ -45,7 +45,7 @@ export default function Navbar() {
             <Link to="/cart">
               <button className="btn" id="btn-cart">
                 <img
-                  src="src/assets/img/menu_icons/menu-cart.png"
+                  src="/assets/img/menu_icons/menu-cart.png"
                   alt="Logo"
                   id="navbar-cart"
                 />

@@ -1,0 +1,76 @@
+.xp-tabs {
+  border: 1px solid #808080;
+  background-color: #ece9d8;
+}
+
+.xp-tab-buttons {
+  display: flex;
+  background-color: #d4d0c8;
+}
+
+.xp-tab-buttons button {
+  border: 1px solid #808080;
+  border-bottom: none;
+  background-color: #d4d0c8;
+  padding: 5px 12px;
+  margin-right: 2px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.xp-tab-buttons button.active {
+  background-color: #ffffff;
+  font-weight: bold;
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid #ffffff;
+}
+
+.xp-tab-content {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  background-color: white;
+  border-top: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.xp-tab-content img {
+  width: 300px;
+  height: auto;
+}
+
+.image-tab-gallery img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #aaa;
+}
+
+.general-info,
+.price-info {
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+}
+
+.price-info-box {
+  padding-top: 4rem;
+}
+
+.product-info-box button {
+  margin-top: 4rem;
+  font-size: 20px;
+}
+
+.price-promotion {
+  color: red;
+}
+
+.price-promotion span {
+  font-weight: 900;
+}
+
+.btn-torna-indietro {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

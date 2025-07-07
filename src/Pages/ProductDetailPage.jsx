@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "../context/CartContext";
+import Card from "../components/Card/Card";
+import ProductTabs from "../components/Card/ProductTabs";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -53,101 +55,19 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <main>
-      <div className="container product-detail">
-        <button onClick={() => navigate(-1)} className="btn-back">
-          ← Torna ai prodotti
-        </button>
-
-        <div className="product-box">
-          <div className="product-img-box">
-            <img src={`${product.thumbnail_url}`} alt={product.name} />
-            {isNewArrival && <span className="badge-new">NUOVO 🔥</span>}
-          </div>
-
-          <div className="product-info-box">
-            <h1>{product.name}</h1>
-            <p>
-              <strong>Brand:</strong> {product.brand_name}
-            </p>
-            <p>
-              <strong>Categoria:</strong> {product.category_name}
-            </p>
-            <p>{product.description}</p>
-
-            <div className="price-box">
-              {hasPromo && (
-                <span className="price-old">
-                  € {parseFloat(product.price).toFixed(2)}
-                </span>
-              )}
-              <span className="price-final">€ {displayPrice.toFixed(2)}</span>
-            </div>
-
-            <button className="btn-add" onClick={handleAddToCart}>
-              Aggiungi al carrello 🛒
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <style>
-        {`
-        .container.product-detail {
-          padding: 2rem;
-        }
-        .btn-back {
-          background: none;
-          border: none;
-          color: #444;
-          margin-bottom: 1rem;
-          cursor: pointer;
-        }
-        .product-box {
-          display: flex;
-          gap: 2rem;
-          flex-wrap: wrap;
-        }
-        .product-img-box img {
-          width: 300px;
-          border-radius: 8px;
-        }
-        .badge-new {
-          display: inline-block;
-          margin-top: 1rem;
-          background: #ffd700;
-          color: #222;
-          padding: 0.3rem 0.6rem;
-          font-weight: bold;
-          border-radius: 5px;
-        }
-        .product-info-box {
-          max-width: 500px;
-        }
-        .price-box {
-          margin: 1rem 0;
-        }
-        .price-old {
-          text-decoration: line-through;
-          color: gray;
-          margin-right: 1rem;
-        }
-        .price-final {
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: #222;
-        }
-        .btn-add {
-          margin-top: 1rem;
-          background: #007bff;
-          color: white;
-          padding: 0.7rem 1.2rem;
-          border: none;
-          border-radius: 6px;
-          cursor: pointer;
-        }
-        `}
-      </style>
-    </main>
+    <div className="container">
+      <Card
+        title={product.name}
+        bottomMessage="I case non servono solo a proteggere i componenti, ma anche a dare loro più spirito cool..."
+        onCloseClick={() => navigate(-1)}
+      >
+        <ProductTabs
+          product={product}
+          displayPrice={displayPrice}
+          isNewArrival={isNewArrival}
+          onAddToCart={handleAddToCart}
+        />
+      </Card>
+    </div>
   );
 }
