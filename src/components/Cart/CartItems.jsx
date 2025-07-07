@@ -11,7 +11,13 @@ export default function CartItems({ cart, removeFromCart, updateQuantity }) {
             />
             <div className="card-body">
               <h5 className="card-title">{item.name}</h5>
-              <p className="card-text">Prezzo: €{item.price.toFixed(2)}</p>
+              <p className="card-text">
+                Prezzo: €
+                {typeof item.price === "number"
+                  ? item.price.toFixed(2)
+                  : parseFloat(item.price).toFixed(2)}
+              </p>
+
               <input
                 value={item.quantity}
                 type="number"

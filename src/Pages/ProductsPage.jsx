@@ -1,67 +1,83 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
+
 import Card from "../components/Card/Card";
+import Toast from "../components/ui/Toast";
+import { CartContext } from "../context/CartContext";
 
 export default function ProductsPage() {
   const searchApi = "http://localhost:3000/products/search";
   const brandsApi = "http://localhost:3000/brands";
   const categoriesApi = "http://localhost:3000/categories";
 
+  const { addToCart } = useContext(CartContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [quantities, setQuantities] = useState({});
+  const [showToast, setShowToast] = useState(false);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  // Stati controllati del form
+  const [search, setSearch] = useState("");
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sort, setSort] = useState("");
 
-  // 🧠 Stato inizializzato con valori dalla URL
-  const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [brand, setBrand] = useState(searchParams.get("brand") || "");
-  const [category, setCategory] = useState(searchParams.get("category") || "");
-  const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || "");
-  const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || "");
-  const [sort, setSort] = useState(searchParams.get("sort") || "");
+  const handleQuantityChange = (productId, value) => {
+    const qty = Math.max(1, parseInt(value));
+    setQuantities((prev) => ({ ...prev, [productId]: qty }));
+  };
 
-  // 🔍 Fetch prodotti in base ai parametri URL
+  const handleAddToCart = (product, quantity = 1) => {
+    const price =
+      product.promotion_price > 0 ? product.promotion_price : product.price;
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      thumbnail: product.thumbnail_url,
+      price,
+      quantity,
+    });
+
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
+  };
+
   const fetchProducts = () => {
     axios
       .get(searchApi, {
         params: {
-          search,
-          brand,
-          category,
-          minPrice,
-          maxPrice,
-          sort,
+          search: searchParams.get("search") || "",
+          brand: searchParams.get("brand") || "",
+          category: searchParams.get("category") || "",
+          minPrice: searchParams.get("minPrice") || "",
+          maxPrice: searchParams.get("maxPrice") || "",
+          sort: searchParams.get("sort") || "",
         },
       })
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((err) => {
-        console.error("Errore fetch prodotti:", err);
-      });
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.error("Errore fetch prodotti:", err));
   };
 
-  // 📦 Fetch brand e categorie
   const fetchFilters = () => {
     axios.get(brandsApi).then((res) => setBrands(res.data));
     axios.get(categoriesApi).then((res) => setCategories(res.data));
   };
 
-  // 🧠 Inizializzazione
   useEffect(() => {
     fetchFilters();
-    fetchProducts();
   }, []);
 
-  // 🔁 Reazione a URL aggiornata
   useEffect(() => {
     fetchProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  // 🔗 Aggiorna URL + dati al submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -78,11 +94,17 @@ export default function ProductsPage() {
 
   return (
     <div>
+      {showToast && (
+        <Toast
+          message="Prodotto aggiunto al carrello!"
+          onClose={() => setShowToast(false)}
+        />
+      )}
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Search..."
-          name="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -140,12 +162,11 @@ export default function ProductsPage() {
         products.map((product) => (
           <Card
             key={product.id}
-            title="Nome della sezione"
+            title={product.name}
             bottomMessage="Don't shut down your monitor!"
           >
             <div className="flex featured-container">
               <div className="featured-info">
-                <h1>{product.name}</h1>
                 <p>{product.description}</p>
                 <h4>
                   {product.promotion_price > 0 &&
@@ -157,10 +178,31 @@ export default function ProductsPage() {
                     <>{product.price}€</>
                   )}
                 </h4>
+
                 <Link to={`/products/${product.id}`} className="btn-detail">
                   Scopri di più →
                 </Link>
+
+                <div className="cart-controls">
+                  <input
+                    type="number"
+                    min="1"
+                    value={quantities[product.id] || 1}
+                    onChange={(e) =>
+                      handleQuantityChange(product.id, e.target.value)
+                    }
+                  />
+                  <button
+                    className="btn btn-cart"
+                    onClick={() =>
+                      handleAddToCart(product, quantities[product.id] || 1)
+                    }
+                  >
+                    Aggiungi al carrello
+                  </button>
+                </div>
               </div>
+
               <div className="featured-image">
                 <div className="featured-image-content flex">
                   {product.promotion_price > 0 &&
