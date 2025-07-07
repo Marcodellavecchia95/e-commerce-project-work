@@ -62,6 +62,7 @@ export default function ProductsPage() {
               title="Nome della sezione"
               bottomMessage="Don't shut down your
                             monitor!"
+              linkTo={`/products/${product.id}`}
             >
               {product && (
                 <div className="flex featured-container">
@@ -79,6 +80,9 @@ export default function ProductsPage() {
                         <>{product.price}€</>
                       )}
                     </h4>
+                    <Link to={`/products/${product.id}`} className="btn-detail">
+                      Scopri di più →
+                    </Link>
                   </div>
                   <div className="featured-image">
                     <div className="featured-image-content flex">

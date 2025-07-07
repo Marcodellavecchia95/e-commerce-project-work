@@ -4,7 +4,7 @@ export default function CartSummary({ cart }) {
   return (
     <div className="cart-summary">
       <h2>Riepilogo Carrello</h2>
-      <p> Costo spedizione: €8.99 </p>
+      <p> Costo spedizione: Calcolato al checkout </p>
       <p>
         Totale: €{" "}
         {(
