@@ -4,6 +4,7 @@ import axios from "axios";
 import { CartContext } from "../context/CartContext";
 import Card from "../components/Card/Card";
 import ProductTabs from "../components/Card/ProductTabs";
+import Toast from "../components/ui/Toast";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -12,6 +13,7 @@ export default function ProductDetailPage() {
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     axios
@@ -52,10 +54,17 @@ export default function ProductDetailPage() {
       price: displayPrice,
       quantity: 1,
     });
+    setShowToast(true);
   };
 
   return (
     <div className="container">
+      {showToast && (
+        <Toast
+          message="Prodotto aggiunto al carrello!"
+          onClose={() => setShowToast(false)}
+        />
+      )}
       <Card
         title={product.name}
         bottomMessage="I case non servono solo a proteggere i componenti, ma anche a dare loro più spirito cool..."

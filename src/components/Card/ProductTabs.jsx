@@ -71,7 +71,7 @@ export default function ProductTabs({
           <div className="product-box">
             <div className="product-img-box">
               <img src={product.thumbnail_url} alt={product.name} />
-              {isNewArrival && <span className="badge-new">NUOVO 🔥</span>}
+              {isNewArrival && <span className="badge-new">NUOVO!</span>}
             </div>
           </div>
         )}
