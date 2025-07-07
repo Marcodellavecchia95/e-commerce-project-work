@@ -110,6 +110,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 9999;
+  box-shadow: 1px 1px 10px black;
 }
 
 .navlink-component-image-plus {
