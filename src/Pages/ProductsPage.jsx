@@ -42,7 +42,7 @@ export default function ProductsPage() {
           />
           <button type="submit" className="btn" id="btn-search">
             <img
-              src="src/assets/img/buttons/btn-search.png"
+              src="/assets/img/buttons/btn-search.png"
               alt="Search"
               id="search-icon"
             />
