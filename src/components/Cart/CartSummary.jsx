@@ -7,10 +7,9 @@ export default function CartSummary({ cart }) {
       <p> Costo spedizione: Calcolato al checkout </p>
       <p>
         Totale: €{" "}
-        {(
-          cart.reduce((total, item) => total + item.price * item.quantity, 0) +
-          8.99
-        ).toFixed(2)}
+        {cart
+          .reduce((total, item) => total + item.price * item.quantity, 0)
+          .toFixed(2)}
       </p>
       <NavLink to="/checkout" className="btn">
         Procedi al Checkout
