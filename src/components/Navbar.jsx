@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import CartOffcanvas from "./Cart/CartOffcanvas";
 
 export default function Navbar() {
   const { cart } = useContext(CartContext);
@@ -47,25 +48,15 @@ export default function Navbar() {
 
           {/* sezione carrello */}
           <div className="navbar-order-section">
-            <Link to="/cart">
-              <button className="btn" id="btn-cart">
-                <div
-                  className="cart-icon-container"
-                  style={{ position: "relative" }}
-                >
-                  <img
-                    src="/assets/img/menu_icons/menu-cart.png"
-                    alt="Carrello"
-                    id="navbar-cart"
-                  />
-                  {totalItems > 0 && (
-                    <span className="cart-badge">{totalItems}</span>
-                  )}
-                </div>
-              </button>
-            </Link>
+            <CartOffcanvas />
+            {/*  <Link to="/cart">
+             
+            </Link> */}
           </div>
         </nav>
+      </div>
+      <div className="banner-discounts">
+        Per ordini superiori a €100 la spedizione è gratuita!
       </div>
     </div>
   );

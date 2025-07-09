@@ -59,7 +59,7 @@ export default function CartItems({
                 >
                   -
                 </button>
-                <input value={item.quantity} type="number" min={1} disabled />
+                <input value={item.quantity} type="number" min={1} readOnly />
                 <button
                   className="btn"
                   onClick={() => increaseQuantity(item.id)}
