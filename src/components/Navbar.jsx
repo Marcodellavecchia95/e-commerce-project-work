@@ -49,9 +49,6 @@ export default function Navbar() {
           {/* sezione carrello */}
           <div className="navbar-order-section">
             <CartOffcanvas />
-            {/*  <Link to="/cart">
-             
-            </Link> */}
           </div>
         </nav>
       </div>
