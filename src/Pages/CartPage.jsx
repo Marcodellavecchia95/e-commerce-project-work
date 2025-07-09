@@ -30,7 +30,7 @@ export default function CartPage() {
                   />
                 </div>
                 <div className="col-20">
-                  <CartSummary cart={cart} />
+                  <CartSummary cart={cart} viewCartBtn={false} />
                 </div>
               </div>
             </>

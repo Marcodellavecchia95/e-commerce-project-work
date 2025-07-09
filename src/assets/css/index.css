@@ -197,6 +197,17 @@ form {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
+.banner-discounts {
+  width: 100%;
+  background-color: #01138d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #fff;
+  padding: 10px 0;
+}
+
 @media screen and (max-width: 600px) {
   .cart-badge {
     width: 10px;
