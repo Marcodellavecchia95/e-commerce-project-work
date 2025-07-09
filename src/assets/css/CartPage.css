@@ -8,7 +8,7 @@
 .cart-wrapper {
   background-color: #fffaf4;
   width: 90vw;
-  height: 90vh;
+  height: 80vh;
   margin: 0 auto;
   padding: 10px 20px;
   border-radius: 10px;
@@ -50,4 +50,25 @@
   gap: 10px;
   max-height: 70vh;
   overflow-y: auto;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+.cart-item-quantity input {
+  width: 50px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.cart-item-quantity button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
 }

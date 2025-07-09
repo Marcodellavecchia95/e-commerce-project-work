@@ -1,46 +1,73 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
+
 import Card from "../components/Card/Card";
+import Toast from "../components/ui/Toast";
+import { CartContext } from "../context/CartContext";
 
 export default function ProductsPage() {
   const searchApi = "http://localhost:3000/products/search";
   const brandsApi = "http://localhost:3000/brands";
   const categoriesApi = "http://localhost:3000/categories";
 
+  const { addToCart } = useContext(CartContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [products, setProducts] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [quantities, setQuantities] = useState({});
+  const [showToast, setShowToast] = useState(false);
+
+  // Stati controllati del form
   const [search, setSearch] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sort, setSort] = useState("");
+  const [promoOnly, setPromoOnly] = useState(false);
 
-  const [brands, setBrands] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const handleQuantityChange = (productId, value) => {
+    const qty = Math.max(1, parseInt(value));
+    setQuantities((prev) => ({ ...prev, [productId]: qty }));
+  };
 
-  // Fetch prodotti
+  const handleAddToCart = (product, quantity = 1) => {
+    const price =
+      product.promotion_price > 0 ? product.promotion_price : product.price;
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      thumbnail: product.thumbnail_url,
+      price: price,
+      price_original: product.price,
+      quantity,
+    });
+
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
+  };
+
   const fetchProducts = () => {
     axios
       .get(searchApi, {
         params: {
-          search,
-          brand,
-          category,
-          minPrice,
-          maxPrice,
-          sort,
+          search: searchParams.get("search") || "",
+          brand: searchParams.get("brand") || "",
+          category: searchParams.get("category") || "",
+          minPrice: searchParams.get("minPrice") || "",
+          maxPrice: searchParams.get("maxPrice") || "",
+          sort: searchParams.get("sort") || "",
+          promo: searchParams.get("promo") || "",
         },
       })
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((err) => {
-        console.error("Errore fetch prodotti:", err);
-      });
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.error("Errore fetch prodotti:", err));
   };
 
-  // Fetch filtri
   const fetchFilters = () => {
     axios.get(brandsApi).then((res) => setBrands(res.data));
     axios.get(categoriesApi).then((res) => setCategories(res.data));
@@ -48,109 +75,160 @@ export default function ProductsPage() {
 
   useEffect(() => {
     fetchFilters();
+  }, []);
+
+  useEffect(() => {
     fetchProducts();
+  }, [searchParams]);
+
+  useEffect(() => {
+    setPromoOnly(searchParams.get("promo") === "true");
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchProducts();
+
+    const params = {};
+    if (search) params.search = search;
+    if (brand) params.brand = brand;
+    if (category) params.category = category;
+    if (minPrice) params.minPrice = minPrice;
+    if (maxPrice) params.maxPrice = maxPrice;
+    if (sort) params.sort = sort;
+    if (promoOnly) params.promo = "true";
+
+    setSearchParams(params);
   };
 
   return (
     <div>
-      <div>
-        <form onSubmit={handleSubmit}>
+      {showToast && (
+        <Toast
+          message="Prodotto aggiunto al carrello!"
+          onClose={() => setShowToast(false)}
+        />
+      )}
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <select value={brand} onChange={(e) => setBrand(e.target.value)}>
+          <option value="">Tutti i brand</option>
+          {brands.map((b) => (
+            <option key={b.id} value={b.name}>
+              {b.name}
+            </option>
+          ))}
+        </select>
+
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="">Tutte le categorie</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.name}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+
+        <input
+          type="number"
+          placeholder="Prezzo minimo"
+          value={minPrice}
+          onChange={(e) => setMinPrice(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Prezzo massimo"
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+        />
+
+        <select value={sort} onChange={(e) => setSort(e.target.value)}>
+          <option value="">Ordina per...</option>
+          <option value="price_asc">Prezzo crescente</option>
+          <option value="price_desc">Prezzo decrescente</option>
+          <option value="recent">Ultimi arrivi</option>
+        </select>
+
+        <label>
           <input
-            type="text"
-            placeholder="Search..."
-            name="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            type="checkbox"
+            checked={promoOnly}
+            onChange={(e) => setPromoOnly(e.target.checked)}
           />
-          <button type="submit" className="btn" id="btn-search">
-            <img
-              src="/assets/img/buttons/btn-search.png"
-              alt="Search"
-              id="search-icon"
-            />
-          </button>
-        </form>
-        <form>
-          <select value={brand} onChange={(e) => setBrand(e.target.value)}>
-            <option value="">Tutti i brand</option>
-            {brands.map((b) => (
-              <option key={b.id} value={b.name}>
-                {b.name}
-              </option>
-            ))}
-          </select>
+          Solo prodotti in promozione
+        </label>
 
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="">Tutte le categorie</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.name}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+        <button type="submit" className="btn" id="btn-search">
+          Cerca
+        </button>
+      </form>
 
-          <input
-            type="number"
-            placeholder="Prezzo minimo"
-            value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
-          />
-          <input
-            type="number"
-            placeholder="Prezzo massimo"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-          />
+      <Link to="/">
+        <button className="btn btn-icons">Vai alla HomePage</button>
+      </Link>
 
-          <select value={sort} onChange={(e) => setSort(e.target.value)}>
-            <option value="">Ordina per...</option>
-            <option value="price_asc">Prezzo crescente</option>
-            <option value="price_desc">Prezzo decrescente</option>
-            <option value="recent">Ultimi arrivi</option>
-          </select>
+      <h2>Prodotti trovati</h2>
 
-          <button type="submit">Cerca</button>
-        </form>
-
-        <Link to="/">
-          <button className="btn btn-icons">Vai alla HomePage</button>
-        </Link>
-
-        <h2>Prodotti trovati</h2>
-
-        {products.map((product) => (
+      {products.length > 0 ? (
+        products.map((product) => (
           <Card
             key={product.id}
-            title="Nome della sezione"
+            title={product.name}
             bottomMessage="Don't shut down your monitor!"
-            linkTo={`/products/${product.id}`}
           >
             <div className="flex featured-container">
               <div className="featured-info">
-                <h1>{product.name}</h1>
                 <p>{product.description}</p>
                 <h4>
                   {product.promotion_price > 0 &&
                   product.promotion_price < product.price ? (
                     <>
-                      {product.price}€<span>{product.promotion_price}€</span>
+                      <span
+                        style={{
+                          textDecoration: "line-through",
+                          color: "#aaa",
+                          marginRight: "0.5rem",
+                        }}
+                      >
+                        {product.price}€
+                      </span>
+                      <span>{product.promotion_price}€</span>
                     </>
                   ) : (
                     <>{product.price}€</>
                   )}
                 </h4>
-                <Link to={`/products/${product.id}`} className="btn-detail">
+
+                <Link to={`/products/${product.slug}`} className="btn-detail">
                   Scopri di più →
                 </Link>
+
+                <div className="cart-controls">
+                  <input
+                    type="number"
+                    min="1"
+                    value={quantities[product.id] || 1}
+                    onChange={(e) =>
+                      handleQuantityChange(product.id, e.target.value)
+                    }
+                  />
+                  <button
+                    className="btn btn-cart"
+                    onClick={() =>
+                      handleAddToCart(product, quantities[product.id] || 1)
+                    }
+                  >
+                    Aggiungi al carrello
+                  </button>
+                </div>
               </div>
+
               <div className="featured-image">
                 <div className="featured-image-content flex">
                   {product.promotion_price > 0 &&
@@ -168,10 +246,10 @@ export default function ProductsPage() {
               </div>
             </div>
           </Card>
-        ))}
-      </div>
+        ))
+      ) : (
+        <p>Nessun prodotto trovato.</p>
+      )}
     </div>
   );
 }
-
-// commit per le modifiche ai filtri

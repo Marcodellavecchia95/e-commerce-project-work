@@ -7,7 +7,7 @@ import ProductTabs from "../components/Card/ProductTabs";
 import Toast from "../components/ui/Toast";
 
 export default function ProductDetailPage() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
 
@@ -17,7 +17,7 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/products/${id}`)
+      .get(`http://localhost:3000/products/${slug}`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);
@@ -26,7 +26,7 @@ export default function ProductDetailPage() {
         console.error("Errore nel caricamento del prodotto", err);
         setLoading(false);
       });
-  }, [id]);
+  }, [slug]);
 
   if (loading) return <p>Caricamento in corso...</p>;
   if (!product) return <p>Prodotto non trovato.</p>;
