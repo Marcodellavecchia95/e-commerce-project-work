@@ -100,7 +100,7 @@ export default function ClippyBot() {
 
       const rect = clippyEl.getBoundingClientRect();
       const chatTop = rect.top - 190;
-      const chatLeft = rect.left - 110;
+      const chatLeft = rect.left - 130;
 
       chatBox.style.top = `${chatTop}px`;
       chatBox.style.left = `${chatLeft}px`;

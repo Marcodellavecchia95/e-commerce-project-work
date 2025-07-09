@@ -1,3 +1,15 @@
+:root {
+  --card-gradient: linear-gradient(
+    0deg,
+    rgba(1, 67, 135, 1) 0%,
+    rgba(50, 111, 252, 1) 15%,
+    rgba(34, 84, 221, 1) 47%,
+    rgba(34, 84, 221, 1) 83%,
+    rgba(98, 145, 252, 1) 94%
+  );
+  --border-card-color: #041387;
+}
+
 .clippy,
 .clippy-balloon {
   position: fixed;
@@ -63,13 +75,17 @@
 
 .clippy-chat-popup {
   position: fixed;
-  width: 240px;
+  width: 255px;
+  transform: translateX(-50%);
   background-color: #e0e0e0;
-  border: 1px solid gray;
+  border: 1px solid var(--border-card-color);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 9998;
   font-family: "Tahoma", sans-serif;
   overflow: hidden;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
   transition: opacity 0.2s ease;
 }
 
@@ -79,17 +95,26 @@
 
 .clippy-min-btn {
   background: none;
-  border: none;
+  border: 1px solid white;
   color: white;
   font-size: 20px;
   cursor: pointer;
   margin-left: auto;
 }
 
-.clippy-header {
-  background-color: #000080;
+.clippy-clear-btn {
+  background: none;
   color: white;
-  padding: 4px 10px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 6px;
+  border: 1px solid white;
+}
+
+.clippy-header {
+  background: var(--card-gradient);
+  color: white;
+  padding: 6px;
   font-size: 20px;
   display: flex;
   justify-content: space-between;
@@ -98,10 +123,12 @@
 
 .clippy-messages {
   padding: 10px;
-  max-height: 200px;
   overflow-y: auto;
   background: white;
   font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .clippy-input {
@@ -122,4 +149,42 @@
   background: #dcdcdc;
   border: 1px solid #888;
   padding: 4px 8px;
+  font-size: 20px;
+}
+
+.clippy-bubble {
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  max-width: 90%;
+  align-self: flex-start;
+  box-shadow: 1px 1px 1px gray;
+}
+
+.user-bubble {
+  background-color: #0078d7;
+  color: white;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  max-width: 90%;
+  align-self: flex-end;
+  box-shadow: 1px 1px 1px gray;
+}
+
+/*  SCROLLBAR */
+
+.clippy-messages::-webkit-scrollbar {
+  width: 12px;
+}
+
+.clippy-messages::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #aaa;
+}
+
+.clippy-messages::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 1px solid #888;
+  box-shadow: inset 1px 1px 0 white;
 }
