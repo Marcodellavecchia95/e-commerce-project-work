@@ -173,7 +173,7 @@ export default function Homepage() {
               <FolderImage />
               <p>{product.name}</p>
 
-              <Link to={`/products/${product.id}`} className="btn btn-hover">
+              <Link to={`/products/${product.slug}`} className="btn btn-hover">
                 <img
                   src="/assets/img/folders/folder-search.png"
                   alt="Folder search"
@@ -226,7 +226,10 @@ export default function Homepage() {
                 <FolderImage />
                 <p>{product.name}</p>
 
-                <Link to={`/products/${product.id}`} className="btn btn-hover">
+                <Link
+                  to={`/products/${product.slug}`}
+                  className="btn btn-hover"
+                >
                   <img
                     src="/assets/img/folders/folder-search.png"
                     alt="Folder search"

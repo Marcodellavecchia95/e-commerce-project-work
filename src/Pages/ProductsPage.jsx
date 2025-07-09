@@ -179,7 +179,7 @@ export default function ProductsPage() {
                   )}
                 </h4>
 
-                <Link to={`/products/${product.id}`} className="btn-detail">
+                <Link to={`/products/${product.slug}`} className="btn-detail">
                   Scopri di più →
                 </Link>
 
