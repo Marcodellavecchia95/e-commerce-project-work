@@ -38,7 +38,7 @@ export default function Homepage() {
     });
 
     setShowToast(true);
-    setTimeout(() => setShowToast(false), 2500);
+    setTimeout(() => setShowToast(false), 5000);
   };
 
   const fetchRecentProducts = () => {

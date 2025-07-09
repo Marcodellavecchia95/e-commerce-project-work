@@ -1,6 +1,11 @@
 import { Link } from "react-router";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 export default function Navbar() {
+  const { cart } = useContext(CartContext);
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <div className="navbar-container">
       <div className="container">
@@ -44,11 +49,19 @@ export default function Navbar() {
           <div className="navbar-order-section">
             <Link to="/cart">
               <button className="btn" id="btn-cart">
-                <img
-                  src="/assets/img/menu_icons/menu-cart.png"
-                  alt="Logo"
-                  id="navbar-cart"
-                />
+                <div
+                  className="cart-icon-container"
+                  style={{ position: "relative" }}
+                >
+                  <img
+                    src="/assets/img/menu_icons/menu-cart.png"
+                    alt="Carrello"
+                    id="navbar-cart"
+                  />
+                  {totalItems > 0 && (
+                    <span className="cart-badge">{totalItems}</span>
+                  )}
+                </div>
               </button>
             </Link>
           </div>
