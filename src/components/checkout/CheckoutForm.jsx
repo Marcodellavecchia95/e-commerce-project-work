@@ -22,6 +22,7 @@ const CheckoutForm = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(
         cart.map((item) => ({
+          id: item.id,
           name: item.name,
           price: item.price,
           quantity: item.quantity,

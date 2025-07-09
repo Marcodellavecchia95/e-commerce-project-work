@@ -1,4 +1,10 @@
-export default function CartItems({ cart, removeFromCart, updateQuantity }) {
+export default function CartItems({
+  cart,
+  removeFromCart,
+  updateQuantity,
+  increaseQuantity,
+  decreaseQuantity,
+}) {
   return (
     <div className="cart-items">
       {cart.map((item) => {
@@ -17,16 +23,23 @@ export default function CartItems({ cart, removeFromCart, updateQuantity }) {
                   ? item.price.toFixed(2)
                   : parseFloat(item.price).toFixed(2)}
               </p>
-
-              <input
-                value={item.quantity}
-                type="number"
-                min={1}
-                onChange={(e) =>
-                  updateQuantity(item.id, Number(e.target.value))
-                }
-              />
-
+              <div className="cart-item-quantity">
+                <button
+                  className="btn"
+                  onClick={() => decreaseQuantity(item.id)}
+                  type="submit"
+                >
+                  -
+                </button>
+                <input value={item.quantity} type="number" min={1} disabled />
+                <button
+                  className="btn"
+                  onClick={() => increaseQuantity(item.id)}
+                  type="submit"
+                >
+                  +
+                </button>
+              </div>
               <button
                 className="btn btn-danger"
                 onClick={() => removeFromCart(item.id)}
