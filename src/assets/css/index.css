@@ -180,6 +180,32 @@ form {
 #btn-cart {
   padding: 3px 4px;
 }
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: #2254dd;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 600px) {
+  .cart-badge {
+    width: 10px;
+    height: 10px;
+    font-size: 0.65rem;
+    top: -4px;
+    right: -4px;
+  }
+}
 
 /* MAIN */
 
