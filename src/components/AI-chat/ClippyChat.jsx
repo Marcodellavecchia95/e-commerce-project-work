@@ -1,6 +1,7 @@
 import { forwardRef, useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { sendMessageToDialogflow } from "../../services/dialogflowService.js";
-import MiniProductCard from "./MiniProductCard";
+import MiniProductCard from "./MiniProductCard.jsx";
 
 const ClippyChat = forwardRef(({ visible, onClose }, ref) => {
   const [input, setInput] = useState("");
@@ -8,6 +9,7 @@ const ClippyChat = forwardRef(({ visible, onClose }, ref) => {
     { sender: "clippy", text: "Ciao! Come posso aiutarti oggi?" },
   ]);
 
+  const navigate = useNavigate();
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -28,14 +30,11 @@ const ClippyChat = forwardRef(({ visible, onClose }, ref) => {
       const response = await sendMessageToDialogflow(input);
       const botText = response.fulfillmentText;
 
-      // Verifica presenza entità prodotto
-      const hasProduct = response.parameters?.fields?.product;
-      const botResponse = hasProduct
+      const botResponse = response.product
         ? {
             sender: "clippy",
-            text: null,
             showProductCard: true,
-            productName: hasProduct.stringValue,
+            product: response.product,
           }
         : { sender: "clippy", text: botText };
 
@@ -67,7 +66,11 @@ const ClippyChat = forwardRef(({ visible, onClose }, ref) => {
       <div className="clippy-messages">
         {messages.map((msg, i) =>
           msg.showProductCard ? (
-            <MiniProductCard key={i} productName={msg.productName} />
+            <MiniProductCard
+              key={i}
+              product={msg.product}
+              onViewDetails={() => navigate(`/product/${msg.product.slug}`)}
+            />
           ) : (
             <div
               key={i}

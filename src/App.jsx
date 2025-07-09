@@ -22,8 +22,8 @@ export default function App() {
           <Route path="/checkout" element={<CheckoutForm />} />
           <Route path="/return" element={<ReturnPage />} />
         </Routes>
+        <ClippyBot />
       </BrowserRouter>
-      <ClippyBot />
     </CartProvider>
   );
 }
