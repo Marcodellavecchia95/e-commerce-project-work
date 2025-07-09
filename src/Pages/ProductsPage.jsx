@@ -41,7 +41,8 @@ export default function ProductsPage() {
       id: product.id,
       name: product.name,
       thumbnail: product.thumbnail_url,
-      price,
+      price: price, // già scontato
+      price_original: product.price, // <-- AGGIUNTO ORA
       quantity,
     });
 
