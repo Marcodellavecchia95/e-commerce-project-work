@@ -7,6 +7,7 @@ import { CartProvider } from "../src/context/CartContext";
 import CartPage from "./Pages/CartPage.jsx";
 import CheckoutForm from "./components/checkout/CheckoutForm.jsx";
 import ReturnPage from "./components/checkout/ReturnPage.jsx";
+import ClippyBot from "./components/AI-chat/ClippyBot.jsx";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/checkout" element={<CheckoutForm />} />
           <Route path="/return" element={<ReturnPage />} />
         </Routes>
+        <ClippyBot />
       </BrowserRouter>
     </CartProvider>
   );
