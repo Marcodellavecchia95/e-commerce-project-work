@@ -27,6 +27,7 @@ export default function ProductsPage() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sort, setSort] = useState("");
+  const [promoOnly, setPromoOnly] = useState(false);
 
   const handleQuantityChange = (productId, value) => {
     const qty = Math.max(1, parseInt(value));
@@ -41,8 +42,8 @@ export default function ProductsPage() {
       id: product.id,
       name: product.name,
       thumbnail: product.thumbnail_url,
-      price: price, // già scontato
-      price_original: product.price, // <-- AGGIUNTO ORA
+      price: price,
+      price_original: product.price,
       quantity,
     });
 
@@ -60,6 +61,7 @@ export default function ProductsPage() {
           minPrice: searchParams.get("minPrice") || "",
           maxPrice: searchParams.get("maxPrice") || "",
           sort: searchParams.get("sort") || "",
+          promo: searchParams.get("promo") || "",
         },
       })
       .then((res) => setProducts(res.data))
@@ -79,6 +81,10 @@ export default function ProductsPage() {
     fetchProducts();
   }, [searchParams]);
 
+  useEffect(() => {
+    setPromoOnly(searchParams.get("promo") === "true");
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -89,6 +95,7 @@ export default function ProductsPage() {
     if (minPrice) params.minPrice = minPrice;
     if (maxPrice) params.maxPrice = maxPrice;
     if (sort) params.sort = sort;
+    if (promoOnly) params.promo = "true";
 
     setSearchParams(params);
   };
@@ -148,6 +155,15 @@ export default function ProductsPage() {
           <option value="recent">Ultimi arrivi</option>
         </select>
 
+        <label>
+          <input
+            type="checkbox"
+            checked={promoOnly}
+            onChange={(e) => setPromoOnly(e.target.checked)}
+          />
+          Solo prodotti in promozione
+        </label>
+
         <button type="submit" className="btn" id="btn-search">
           Cerca
         </button>
@@ -173,7 +189,16 @@ export default function ProductsPage() {
                   {product.promotion_price > 0 &&
                   product.promotion_price < product.price ? (
                     <>
-                      {product.price}€<span>{product.promotion_price}€</span>
+                      <span
+                        style={{
+                          textDecoration: "line-through",
+                          color: "#aaa",
+                          marginRight: "0.5rem",
+                        }}
+                      >
+                        {product.price}€
+                      </span>
+                      <span>{product.promotion_price}€</span>
                     </>
                   ) : (
                     <>{product.price}€</>
