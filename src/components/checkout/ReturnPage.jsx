@@ -12,19 +12,21 @@ const ReturnPage = () => {
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
 
-    fetch(`http://localhost:3000/stripe/session-status?session_id=${sessionId}`)
+    /*  fetch(`http://localhost:3000/stripe/session-status?session_id=${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
         setStatus(data.status);
         setCustomerEmail(data.customer_email);
         console.log(data);
-      });
+      }); */
     axios
       .get(
         `http://localhost:3000/stripe/session-status?session_id=${sessionId}`
       )
       .then((res) => {
         const { status, user, paymentMethod, products } = res.data;
+        setStatus(status);
+        setCustomerEmail(user.email);
 
         if (status === "complete") {
           axios
