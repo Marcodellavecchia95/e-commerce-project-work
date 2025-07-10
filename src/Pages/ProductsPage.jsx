@@ -184,7 +184,7 @@ export default function ProductsPage() {
         </div>
       </form>
       <h2 className="found-products">Prodotti trovati</h2>
-      {products.length > 0 &&
+      {products.length > 0 ? (
         products.map((product) => (
           <Card
             key={product.id}
@@ -263,8 +263,10 @@ export default function ProductsPage() {
               </div>
             </div>
           </Card>
-        ))}
-      : (<p>Nessun prodotto trovato.</p>)
+        ))
+      ) : (
+        <p>Nessun prodotto trovato.</p>
+      )}
     </div>
   );
 }
