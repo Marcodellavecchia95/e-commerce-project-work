@@ -47,6 +47,13 @@ export default function ProductTabs({
 
   return (
     <>
+      {showToast && (
+        <Toast
+          message="Prodotto aggiunto al carrello!"
+          onClose={() => setShowToast(false)}
+        />
+      )}
+
       <div className="xp-tabs">
         <div className="xp-tab-buttons">
           <button

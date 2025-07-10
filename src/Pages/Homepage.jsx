@@ -61,6 +61,13 @@ export default function Homepage() {
 
   return (
     <main className="container">
+      {showToast && (
+        <Toast
+          message="Prodotto aggiunto al carrello!"
+          onClose={() => setShowToast(false)}
+        />
+      )}
+
       <header>
         <div>
           <h3>REPUBLIC OF RETRO©</h3>
