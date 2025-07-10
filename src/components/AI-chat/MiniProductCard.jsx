@@ -60,13 +60,6 @@ export default function MiniProductCard({ product }) {
           <button onClick={handleViewDetails} className="btn btn-hover">
             Mostra
           </button>
-          <button
-            onClick={handleAddToCart}
-            className="btn btn-hover"
-            title="Aggiungi al carrello"
-          >
-            🛒
-          </button>
         </div>
       </div>
     </div>
