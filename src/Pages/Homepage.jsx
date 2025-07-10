@@ -60,13 +60,6 @@ export default function Homepage() {
 
   return (
     <main className="container">
-      {showToast && (
-        <Toast
-          message="Prodotto aggiunto al carrello!"
-          onClose={() => setShowToast(false)}
-        />
-      )}
-
       <header>
         <div>
           <h3>REPUBLIC OF RETRO©</h3>
@@ -114,19 +107,22 @@ export default function Homepage() {
               </div>
               <hr />
 
-              <Link
-                to={`/products/${recentProducts[0].id}`}
-                className="btn btn-hover"
-              >
-                <img
-                  src="/assets/img/folders/folder-search.png"
-                  alt="Folder open"
-                />
-                Scopri di più
+              <Link to={`/products/${recentProducts[0].slug}`}>
+                <button className="btn btn-hover">
+                  <img
+                    src="/assets/img/folders/folder-search.png"
+                    alt="Folder open"
+                  />
+                  Scopri di più
+                </button>
               </Link>
 
               <div className="cart-controls">
+                <label htmlFor="qty" className="xp-label">
+                  Quantità:
+                </label>
                 <input
+                  id="qty"
                   type="number"
                   min="1"
                   value={quantities[recentProducts[0].id] || 1}
@@ -170,19 +166,25 @@ export default function Homepage() {
         <div className="products-gallery">
           {recentProducts.slice(0, visibleRecentCount).map((product) => (
             <div key={product.id} className="products-gallery-item">
-              <FolderImage />
+              <FolderImage thumbnail={product.thumbnail_url} />
               <p>{product.name}</p>
 
-              <Link to={`/products/${product.slug}`} className="btn btn-hover">
-                <img
-                  src="/assets/img/folders/folder-search.png"
-                  alt="Folder search"
-                />
-                Guarda il prodotto
+              <Link to={`/products/${product.slug}`}>
+                <button className="btn btn-hover">
+                  <img
+                    src="/assets/img/folders/folder-search.png"
+                    alt="Folder search"
+                  />
+                  Guarda il prodotto
+                </button>
               </Link>
 
               <div className="cart-controls">
+                <label htmlFor="qty" className="xp-label">
+                  Quantità:
+                </label>
                 <input
+                  id="qty"
                   type="number"
                   min="1"
                   value={quantities[product.id] || 1}
@@ -223,22 +225,25 @@ export default function Homepage() {
             .slice(0, visibleBestSellerCount)
             .map((product) => (
               <div key={product.id} className="products-gallery-item">
-                <FolderImage />
+                <FolderImage thumbnail={product.thumbnail_url} />
                 <p>{product.name}</p>
 
-                <Link
-                  to={`/products/${product.slug}`}
-                  className="btn btn-hover"
-                >
-                  <img
-                    src="/assets/img/folders/folder-search.png"
-                    alt="Folder search"
-                  />
-                  Guarda il prodotto
+                <Link to={`/products/${product.slug}`}>
+                  <button className="btn btn-hover">
+                    <img
+                      src="/assets/img/folders/folder-search.png"
+                      alt="Folder search"
+                    />
+                    Guarda il prodotto
+                  </button>
                 </Link>
 
                 <div className="cart-controls">
+                  <label htmlFor="qty" className="xp-label">
+                    Quantità:
+                  </label>
                   <input
+                    id="qty"
                     type="number"
                     min="1"
                     value={quantities[product.id] || 1}

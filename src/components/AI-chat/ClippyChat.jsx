@@ -30,16 +30,22 @@ const ClippyChat = forwardRef(({ visible, onClose }, ref) => {
       const response = await sendMessageToDialogflow(input);
       const botText = response.fulfillmentText;
 
-      const botResponse = response.product
-        ? {
+      // Se esiste un prodotto incluso nella risposta
+      if (response.product) {
+        setMessages((prev) => [
+          ...prev,
+          { sender: "clippy", text: botText },
+          {
             sender: "clippy",
             showProductCard: true,
             product: response.product,
-          }
-        : { sender: "clippy", text: botText };
-
-      setMessages((prev) => [...prev, botResponse]);
+          },
+        ]);
+      } else {
+        setMessages((prev) => [...prev, { sender: "clippy", text: botText }]);
+      }
     } catch (error) {
+      console.error("Errore nella richiesta a Dialogflow:", error);
       setMessages((prev) => [
         ...prev,
         { sender: "clippy", text: "Errore nel contattare il bot." },
@@ -64,14 +70,19 @@ const ClippyChat = forwardRef(({ visible, onClose }, ref) => {
       </div>
 
       <div className="clippy-messages">
-        {messages.map((msg, i) =>
-          msg.showProductCard ? (
-            <MiniProductCard
-              key={i}
-              product={msg.product}
-              onViewDetails={() => navigate(`/product/${msg.product.slug}`)}
-            />
-          ) : (
+        {messages.map((msg, i) => {
+          if (msg.showProductCard) {
+            console.log("📦 Product per MiniProductCard:", msg.product);
+            return (
+              <MiniProductCard
+                key={i}
+                product={msg.product}
+                onViewDetails={() => navigate(`/product/${msg.product?.slug}`)}
+              />
+            );
+          }
+
+          return (
             <div
               key={i}
               className={`clippy-msg ${
@@ -80,8 +91,9 @@ const ClippyChat = forwardRef(({ visible, onClose }, ref) => {
             >
               {msg.text}
             </div>
-          )
-        )}
+          );
+        })}
+
         <div ref={messagesEndRef} />
       </div>
 

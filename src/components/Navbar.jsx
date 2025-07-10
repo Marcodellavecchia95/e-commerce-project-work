@@ -36,14 +36,6 @@ export default function Navbar() {
               />
               <Link to={"/products"}>Products</Link>
             </div>
-            <div className="navbar-navlink-component">
-              <img
-                src="/assets/img/menu_icons/menu-plus.png"
-                alt="Apri menù"
-                className="navlink-component-image-plus"
-              />
-              <Link>About us</Link>
-            </div>
           </div>
 
           {/* sezione carrello */}

@@ -97,7 +97,7 @@
   background: none;
   border: 1px solid white;
   color: white;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   margin-left: auto;
 }
@@ -105,7 +105,7 @@
 .clippy-clear-btn {
   background: none;
   color: white;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   margin-right: 6px;
   border: 1px solid white;
@@ -115,7 +115,7 @@
   background: var(--card-gradient);
   color: white;
   padding: 6px;
-  font-size: 20px;
+  font-size: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,7 +125,7 @@
   padding: 10px;
   overflow-y: auto;
   background: white;
-  font-size: 20px;
+  font-size: 25px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -139,7 +139,7 @@
 
 .clippy-input input {
   flex: 1;
-  font-size: 20px;
+  font-size: 25px;
   padding: 4px;
   border: 1px solid #888;
 }
@@ -149,7 +149,7 @@
   background: #dcdcdc;
   border: 1px solid #888;
   padding: 4px 8px;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .clippy-bubble {
@@ -190,54 +190,24 @@
 }
 
 /*  MINI CARD */
-
-.mini-product-card {
+.clippy-chat-mini-product-card {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid #ccc;
+  gap: 10px;
   padding: 10px;
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
   background-color: #f9f9f9;
   margin-top: 10px;
 }
 
-.mini-product-card img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.product-info h4 {
-  margin: 0;
-  font-size: 16px;
-}
-
-.product-info p {
-  margin: 4px 0;
-  font-size: 14px;
-}
-
-.old-price {
-  text-decoration: line-through;
-  color: #888;
-}
-
-.discount-price {
-  color: #d9534f;
-  font-weight: bold;
-  margin-left: 4px;
-}
-
-.actions {
-  margin-top: 8px;
+.clippy-chat-product-info {
   display: flex;
-  gap: 10px;
-  font-size: 18px;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.actions svg {
-  cursor: pointer;
-  color: #007bff;
+.clippy-chat-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
 }
