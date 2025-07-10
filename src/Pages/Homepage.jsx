@@ -33,7 +33,8 @@ export default function Homepage() {
       id: product.id,
       name: product.name,
       thumbnail: product.thumbnail_url,
-      price,
+      price: price,
+      price_original: product.price,
       quantity,
     });
 

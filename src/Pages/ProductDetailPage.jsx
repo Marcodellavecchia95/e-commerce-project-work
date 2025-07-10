@@ -46,13 +46,17 @@ export default function ProductDetailPage() {
     return diff <= 15;
   })();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (product, quantity = 1) => {
+    const price =
+      product.promotion_price > 0 ? product.promotion_price : product.price;
+
     addToCart({
       id: product.id,
       name: product.name,
       thumbnail: product.thumbnail_url,
-      price: displayPrice,
-      quantity: 1,
+      price: price,
+      price_original: product.price,
+      quantity,
     });
     setShowToast(true);
   };
