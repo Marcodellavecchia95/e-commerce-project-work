@@ -8,7 +8,7 @@ export default function Card({
   onCloseClick,
 }) {
   return (
-    <div className="website-card ">
+    <div className="website-card">
       {/* TOP BAR */}
       <div className="website-card-top flex">
         <div className="card-name flex">

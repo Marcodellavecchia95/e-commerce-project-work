@@ -6,7 +6,8 @@
 }
 h1 {
   margin: 20px 0;
-  font-size: 2rem;
+  font-size: 28px;
+  font-weight: 100;
   color: #333;
 }
 
@@ -22,9 +23,9 @@ h1 {
 .cart-card {
   background-color: #fff;
   height: 100%;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  box-shadow: 1px 1px 2px gray;
   padding: 16px;
+  border: 1px solid rgb(210, 210, 210);
 }
 
 .cart-row {
@@ -40,10 +41,10 @@ h1 {
   background-color: #fff;
   height: 100%;
   margin: 0 auto;
-  border-radius: 10px;
+  border: 1px solid rgb(210, 210, 210);
 
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  padding: 16px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -55,7 +56,7 @@ h1 {
   gap: 10px;
   max-height: 70vh;
   overflow-y: auto;
-  padding: 10px;
+  padding: 7px;
 }
 
 .cart-item-quantity {
@@ -67,14 +68,26 @@ h1 {
 .cart-item-quantity input {
   width: 50px;
   padding: 5px;
-  border-radius: 5px;
   border: 1px solid #ccc;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+
+input#cart-qty {
+  width: 50px;
+
+  padding: 2px 4px;
+  font-size: 25px;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+  box-shadow: 1px 1px 1px #bababa;
 }
 
 .cart-item-quantity button {
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: #f0f0f0;
-  cursor: pointer;
+  width: 30px;
+}
+
+.shopping-cart-body h5 {
+  font-size: 30px;
+  padding-bottom: 4px;
 }

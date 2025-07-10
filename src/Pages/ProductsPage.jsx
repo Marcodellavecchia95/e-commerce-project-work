@@ -101,116 +101,127 @@ export default function ProductsPage() {
   };
 
   return (
-    <div>
-      {showToast && (
-        <Toast
-          message="Prodotto aggiunto al carrello!"
-          onClose={() => setShowToast(false)}
-        />
-      )}
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-
-        <select value={brand} onChange={(e) => setBrand(e.target.value)}>
-          <option value="">Tutti i brand</option>
-          {brands.map((b) => (
-            <option key={b.id} value={b.name}>
-              {b.name}
-            </option>
-          ))}
-        </select>
-
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Tutte le categorie</option>
-          {categories.map((c) => (
-            <option key={c.id} value={c.name}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-
-        <input
-          type="number"
-          placeholder="Prezzo minimo"
-          value={minPrice}
-          onChange={(e) => setMinPrice(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Prezzo massimo"
-          value={maxPrice}
-          onChange={(e) => setMaxPrice(e.target.value)}
-        />
-
-        <select value={sort} onChange={(e) => setSort(e.target.value)}>
-          <option value="">Ordina per...</option>
-          <option value="price_asc">Prezzo crescente</option>
-          <option value="price_desc">Prezzo decrescente</option>
-          <option value="recent">Ultimi arrivi</option>
-        </select>
-
-        <label>
+    <div className="container">
+      <form id="form-search" onSubmit={handleSubmit}>
+        <div className="form-top">
           <input
-            type="checkbox"
-            checked={promoOnly}
-            onChange={(e) => setPromoOnly(e.target.checked)}
+            id="search"
+            type="text"
+            placeholder="Cerca"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          Solo prodotti in promozione
-        </label>
 
-        <button type="submit" className="btn" id="btn-search">
-          Cerca
-        </button>
+          <select
+            id="brand"
+            value={brand}
+            onChange={(e) => setBrand(e.target.value)}
+          >
+            <option value="">Tutti i brand</option>
+            {brands.map((b) => (
+              <option key={b.id} value={b.name}>
+                {b.name}
+              </option>
+            ))}
+          </select>
+
+          <select
+            id="categorie"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">Tutte le categorie</option>
+            {categories.map((c) => (
+              <option key={c.id} value={c.name}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+
+          <input
+            id="minPrice"
+            type="number"
+            placeholder="Prezzo minimo"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+          />
+          <input
+            id=""
+            type="number"
+            placeholder="Prezzo massimo"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+          />
+
+          <select value={sort} onChange={(e) => setSort(e.target.value)}>
+            <option value="">Ordina per...</option>
+            <option value="price_asc">Prezzo crescente</option>
+            <option value="price_desc">Prezzo decrescente</option>
+            <option value="recent">Ultimi arrivi</option>
+          </select>
+        </div>
+
+        <div className="form-bottom">
+          <label>
+            <input
+              id="promoOnly"
+              type="checkbox"
+              checked={promoOnly}
+              onChange={(e) => setPromoOnly(e.target.checked)}
+            />
+            Solo prodotti in promozione
+          </label>
+
+          <button type="submit" className="btn btn-hover" id="btn-search">
+            Cerca
+          </button>
+        </div>
       </form>
-
-      <Link to="/">
-        <button className="btn btn-icons">Vai alla HomePage</button>
-      </Link>
-
-      <h2>Prodotti trovati</h2>
-
-      {products.length > 0 ? (
+      <h2 className="found-products">Prodotti trovati</h2>
+      {products.length > 0 &&
         products.map((product) => (
           <Card
             key={product.id}
             title={product.name}
-            bottomMessage="Don't shut down your monitor!"
+            bottomMessage="Ricordati di caricare la batteria del tuo laptop!"
           >
             <div className="flex featured-container">
               <div className="featured-info">
+                <h1>{product.name}</h1>
                 <p>{product.description}</p>
-                <h4>
-                  {product.promotion_price > 0 &&
-                  product.promotion_price < product.price ? (
-                    <>
-                      <span
-                        style={{
-                          textDecoration: "line-through",
-                          color: "#aaa",
-                          marginRight: "0.5rem",
-                        }}
-                      >
-                        {product.price}€
-                      </span>
-                      <span>{product.promotion_price}€</span>
-                    </>
-                  ) : (
-                    <>{product.price}€</>
-                  )}
-                </h4>
+                <hr />
 
-                <Link to={`/products/${product.slug}`} className="btn-detail">
-                  Scopri di più →
+                <div className="original-price-block">
+                  <p>Prezzo originale:</p>
+                  <h4>{product.price}€</h4>
+                </div>
+
+                {product.promotion_price > 0 &&
+                  product.promotion_price < product.price && (
+                    <div className="promotion-price-block">
+                      <p>Prezzo promozionale:</p>
+                      <h4>{product.promotion_price}€</h4>
+                    </div>
+                  )}
+
+                <hr />
+
+                <Link to={`/products/${product.slug}`}>
+                  <button className="btn btn-hover">
+                    <img
+                      src="/assets/img/folders/folder-search.png"
+                      alt="Folder open"
+                    />
+                    Scopri di più
+                  </button>
                 </Link>
 
                 <div className="cart-controls">
+                  <label htmlFor="qty" className="xp-label">
+                    Quantità:
+                  </label>
                   <input
+                    id="qty"
                     type="number"
                     min="1"
                     value={quantities[product.id] || 1}
@@ -246,10 +257,8 @@ export default function ProductsPage() {
               </div>
             </div>
           </Card>
-        ))
-      ) : (
-        <p>Nessun prodotto trovato.</p>
-      )}
+        ))}
+      : (<p>Nessun prodotto trovato.</p>)
     </div>
   );
 }

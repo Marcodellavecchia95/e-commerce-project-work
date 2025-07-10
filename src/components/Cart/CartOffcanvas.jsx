@@ -4,8 +4,6 @@ import { Offcanvas } from "bootstrap";
 import "../../assets/css/CartOffcanvas.css";
 import CartItems from "./CartItems";
 import CartSummary from "./CartSummary";
-import { NavLink } from "react-router";
-/* import "../../assets/css/CartPage.css"; */
 
 export default function CartOffcanvas() {
   const {
@@ -50,26 +48,26 @@ export default function CartOffcanvas() {
       </button>
 
       <div
-        class="offcanvas offcanvas-start"
+        className="offcanvas offcanvas-start"
         data-bs-scroll="true"
         tabIndex="-1"
         id="cartOffcanvas"
         aria-labelledby="cartOffcanvasLabel"
       >
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="cartOffcanvasLabel">
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="cartOffcanvasLabel">
             Il tuo carrello
           </h5>
           <button
             type="button"
-            class="btn-close"
+            className="btn-close"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           >
             x
           </button>
         </div>
-        <div class="offcanvas-body">
+        <div className="offcanvas-body">
           {cart.length === 0 ? (
             <p>Nessun prodtto aggiunto al carrello</p>
           ) : (
@@ -84,7 +82,7 @@ export default function CartOffcanvas() {
             </div>
           )}
         </div>
-        <div class="offcanvas-footer">
+        <div className="offcanvas-footer">
           {cart.length > 0 && (
             <CartSummary
               cart={cart}

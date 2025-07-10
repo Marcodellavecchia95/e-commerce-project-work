@@ -1,0 +1,213 @@
+:root {
+  --card-gradient: linear-gradient(
+    0deg,
+    rgba(1, 67, 135, 1) 0%,
+    rgba(50, 111, 252, 1) 15%,
+    rgba(34, 84, 221, 1) 47%,
+    rgba(34, 84, 221, 1) 83%,
+    rgba(98, 145, 252, 1) 94%
+  );
+  --border-card-color: #041387;
+}
+
+.clippy,
+.clippy-balloon {
+  position: fixed;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.clippy-balloon {
+  background: #ffc;
+  color: black;
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.clippy-content {
+  max-width: 200px;
+  min-width: 120px;
+  font-family: "Microsoft Sans", sans-serif;
+  font-size: 10pt;
+}
+
+.clippy-tip {
+  width: 10px;
+  height: 16px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAgCAMAAAAlvKiEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRF///MAAAA////52QwgAAAAAN0Uk5T//8A18oNQQAAAGxJREFUeNqs0kEOwCAIRFHn3//QTUU6xMyyxii+jQosrTPkyPEM6IN3FtzIRk1U4dFeKWQiH6pRRowMVKEmvronEynkwj0uZJgR22+YLopPSo9P34wJSamLSU7lSIWLJU7NkNomNlhqxUeAAQC+TQLZyEuJBwAAAABJRU5ErkJggg==)
+    no-repeat;
+  position: absolute;
+}
+
+.clippy-top-left .clippy-tip {
+  top: 100%;
+  margin-top: 0px;
+  left: 100%;
+  margin-left: -50px;
+}
+
+.clippy-top-right .clippy-tip {
+  top: 100%;
+  margin-top: 0px;
+  left: 0;
+  margin-left: 50px;
+  background-position: -10px 0;
+}
+
+.clippy-bottom-right .clippy-tip {
+  top: 0;
+  margin-top: -16px;
+  left: 0;
+  margin-left: 50px;
+  background-position: -10px -16px;
+}
+
+.clippy-bottom-left .clippy-tip {
+  top: 0;
+  margin-top: -16px;
+  left: 100%;
+  margin-left: -50px;
+  background-position: 0px -16px;
+}
+
+/*  CHAT */
+
+.clippy-chat-popup {
+  position: fixed;
+  width: 255px;
+  transform: translateX(-50%);
+  background-color: #e0e0e0;
+  border: 1px solid var(--border-card-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 9998;
+  font-family: "Tahoma", sans-serif;
+  overflow: hidden;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.2s ease;
+}
+
+.clippy-chat-popup.hidden {
+  display: none;
+}
+
+.clippy-min-btn {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.clippy-clear-btn {
+  background: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  margin-right: 6px;
+  border: 1px solid white;
+}
+
+.clippy-header {
+  background: var(--card-gradient);
+  color: white;
+  padding: 6px;
+  font-size: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clippy-messages {
+  padding: 10px;
+  overflow-y: auto;
+  background: white;
+  font-size: 25px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.clippy-input {
+  display: flex;
+  padding: 6px;
+  background: #c0c0c0;
+}
+
+.clippy-input input {
+  flex: 1;
+  font-size: 25px;
+  padding: 4px;
+  border: 1px solid #888;
+}
+
+.clippy-input button {
+  margin-left: 6px;
+  background: #dcdcdc;
+  border: 1px solid #888;
+  padding: 4px 8px;
+  font-size: 25px;
+}
+
+.clippy-bubble {
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  max-width: 90%;
+  align-self: flex-start;
+  box-shadow: 1px 1px 1px gray;
+}
+
+.user-bubble {
+  background-color: #0078d7;
+  color: white;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  max-width: 90%;
+  align-self: flex-end;
+  box-shadow: 1px 1px 1px gray;
+}
+
+/*  SCROLLBAR */
+
+.clippy-messages::-webkit-scrollbar {
+  width: 12px;
+}
+
+.clippy-messages::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px solid #aaa;
+}
+
+.clippy-messages::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 1px solid #888;
+  box-shadow: inset 1px 1px 0 white;
+}
+
+/*  MINI CARD */
+.clippy-chat-mini-product-card {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  margin-top: 10px;
+}
+
+.clippy-chat-product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.clippy-chat-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
