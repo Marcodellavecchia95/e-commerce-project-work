@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router";
 import axios from "axios";
+import "../../assets/css/ReturnPage.css";
 
 const ReturnPage = () => {
   const [status, setStatus] = useState(null);
@@ -47,8 +48,8 @@ const ReturnPage = () => {
     return (
       <section id="success">
         <p>
-          We appreciate your business! A confirmation email will be sent to{" "}
-          {customerEmail}. If you have any questions, please email{" "}
+          Un email di conferma dell'ordine è stata inviata a {customerEmail}.
+          Per qualunque chiarimento riguardo all'ordine contattaci a{" "}
           <a href="mailto:orders@example.com">orders@example.com</a>.
         </p>
       </section>

@@ -45,7 +45,7 @@ export default function Navbar() {
         </nav>
       </div>
       <div className="banner-discounts">
-        Per ordini superiori a €100 la spedizione è gratuita!
+        Per ordini superiori a €600 la spedizione è gratuita!
       </div>
     </div>
   );
