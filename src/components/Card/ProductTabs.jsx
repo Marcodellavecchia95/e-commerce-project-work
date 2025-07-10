@@ -82,16 +82,16 @@ export default function ProductTabs({
                   <div className="price-box">
                     <p>Informazioni prezzo:</p>
                     <div className="price-info">
+                      <p className="price-original">
+                        Prezzo originale: {parseFloat(product.price).toFixed(2)}
+                        €
+                      </p>
                       {hasPromo && (
-                        <p className="price-original">
-                          Prezzo originale:{" "}
-                          {parseFloat(product.price).toFixed(2)}€
+                        <p className="price-promotion">
+                          Prezzo in Promozione:{" "}
+                          <span>{parseFloat(displayPrice).toFixed(2)}€</span>
                         </p>
                       )}
-                      <p className="price-promotion">
-                        Prezzo in Promozione:{" "}
-                        <span>{displayPrice.toFixed(2)}€</span>
-                      </p>
                     </div>
                   </div>
                 </div>
