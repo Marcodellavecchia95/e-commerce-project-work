@@ -1,0 +1,28 @@
+.not-found-container {
+  width: 350px;
+  margin-top: 100px;
+}
+
+.not-found-container-content {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.not-found-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.not-found-content p {
+  font-size: 25px;
+}
+
+#not-found-button {
+  margin-bottom: 1rem;
+}
