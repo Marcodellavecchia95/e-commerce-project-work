@@ -8,6 +8,7 @@ export default function ProductTabs({
   onAddToCart,
 }) {
   const [activeTab, setActiveTab] = useState("dettagli");
+
   const [imageList, setImageList] = useState([]);
   const [popupImage, setPopupImage] = useState(null);
   const hasPromo =
@@ -47,13 +48,6 @@ export default function ProductTabs({
 
   return (
     <>
-      {showToast && (
-        <Toast
-          message="Prodotto aggiunto al carrello!"
-          onClose={() => setShowToast(false)}
-        />
-      )}
-
       <div className="xp-tabs">
         <div className="xp-tab-buttons">
           <button
