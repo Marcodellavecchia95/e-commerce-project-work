@@ -8,6 +8,7 @@ export default function ProductTabs({
   onAddToCart,
 }) {
   const [activeTab, setActiveTab] = useState("dettagli");
+
   const [imageList, setImageList] = useState([]);
   const [popupImage, setPopupImage] = useState(null);
   const hasPromo =
@@ -98,9 +99,6 @@ export default function ProductTabs({
                   Aggiungi al carrello +
                 </button>
               </div>
-              <button className="btn" onClick={() => onAddToCart(product)}>
-                Aggiungi al carrello +
-              </button>
             </>
           )}
 

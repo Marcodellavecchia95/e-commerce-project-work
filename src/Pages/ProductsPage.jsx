@@ -102,6 +102,12 @@ export default function ProductsPage() {
 
   return (
     <div className="container">
+      {showToast && (
+        <Toast
+          message="Prodotto aggiunto al carrello!"
+          onClose={() => setShowToast(false)}
+        />
+      )}
       <form id="form-search" onSubmit={handleSubmit}>
         <div className="form-top">
           <input
