@@ -36,6 +36,18 @@
   justify-content: space-around;
 }
 
+@media (max-width: 900px) {
+  .xp-tab-content {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .xp-tab-content img {
+    max-width: 550px;
+    min-width: 100px;
+  }
+}
+
 .xp-tab-content img {
   width: 550px;
 }

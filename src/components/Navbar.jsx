@@ -34,7 +34,7 @@ export default function Navbar() {
                 alt="Apri menù"
                 className="navlink-component-image-plus"
               />
-              <Link to={"/products"}>Products</Link>
+              <Link to={"/products"}>Prodotti</Link>
             </div>
           </div>
 

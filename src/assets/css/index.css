@@ -440,6 +440,7 @@ input#qty {
   justify-content: space-between;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 #promoOnly {
