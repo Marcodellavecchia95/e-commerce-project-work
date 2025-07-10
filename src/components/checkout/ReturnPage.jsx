@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router";
+import axios from "axios";
 
 const ReturnPage = () => {
   const [status, setStatus] = useState(null);
@@ -17,6 +18,25 @@ const ReturnPage = () => {
         setCustomerEmail(data.customer_email);
         console.log(data);
       });
+    axios
+      .get(
+        `http://localhost:3000/stripe/session-status?session_id=${sessionId}`
+      )
+      .then((res) => {
+        const { status, user, paymentMethod, products } = res.data;
+
+        if (status === "complete") {
+          axios
+            .post("http://localhost:3000/orders", {
+              user,
+              paymentMethod,
+              products,
+            })
+
+            .catch((err) => console.error("Errore POST ordine:", err));
+        }
+      })
+      .catch((err) => console.error("Errore GET ordine:", err));
   }, []);
 
   if (status === "open") {
