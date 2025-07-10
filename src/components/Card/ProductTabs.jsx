@@ -95,7 +95,7 @@ export default function ProductTabs({
                     </div>
                   </div>
                 </div>
-                <button className="btn" onClick={onAddToCart}>
+                <button className="btn" onClick={() => onAddToCart(product)}>
                   Aggiungi al carrello +
                 </button>
               </div>
