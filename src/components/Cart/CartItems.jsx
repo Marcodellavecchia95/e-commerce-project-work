@@ -59,15 +59,9 @@ export default function CartItems({
                     -
                   </button>
                   <label htmlFor="cart-qty" className="xp-label cart-qty-label">
-                    Quantità:
+                    Quantità: {item.quantity}
                   </label>
-                  <input
-                    id="cart-qty"
-                    value={item.quantity}
-                    type="number"
-                    min={1}
-                    readOnly
-                  />
+
                   <button
                     className="btn btn-hover"
                     onClick={() => increaseQuantity(item.id)}
