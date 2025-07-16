@@ -5,6 +5,7 @@ import axios from "axios";
 import Card from "../components/Card/Card";
 import Toast from "../components/ui/Toast";
 import { CartContext } from "../context/CartContext";
+import FolderImage from "../components/Card/FolderImage";
 
 export default function ProductsPage() {
   const searchApi = "http://localhost:3000/products/search";
@@ -184,89 +185,40 @@ export default function ProductsPage() {
         </div>
       </form>
       <h2 className="found-products">Prodotti trovati</h2>
-      {products.length > 0 ? (
-        products.map((product) => (
-          <Card
-            key={product.id}
-            title={product.name}
-            bottomMessage="Ricordati di caricare la batteria del tuo laptop!"
-          >
-            <div className="flex featured-container">
-              <div className="featured-info">
-                <h1>{product.name}</h1>
-                <p>{product.description}</p>
-                <hr />
 
-                <div className="original-price-block">
-                  <p>Prezzo originale:</p>
-                  <h4>{product.price}€</h4>
-                </div>
+      <Card
+        title={"Prodotti"}
+        bottomMessage={"Omg! I prodotti sono fantastici!"}
+      >
+        <div className="products-gallery">
+          {products.slice().map((product) => (
+            <div key={product.id} className="products-gallery-item">
+              <FolderImage thumbnail={product.thumbnail_url} />
+              <p>{product.name}</p>
 
-                {product.promotion_price > 0 &&
-                  product.promotion_price < product.price && (
-                    <div className="promotion-price-block">
-                      <p>Prezzo promozionale:</p>
-                      <h4>{product.promotion_price}€</h4>
-                    </div>
-                  )}
-
-                <hr />
-
-                <Link to={`/products/${product.slug}`}>
-                  <button className="btn btn-hover">
-                    <img
-                      src="/assets/img/folders/folder-search.png"
-                      alt="Folder open"
-                    />
-                    Scopri di più
-                  </button>
-                </Link>
-
-                <div className="cart-controls">
-                  <label htmlFor="qty" className="xp-label">
-                    Quantità:
-                  </label>
-                  <input
-                    id="qty"
-                    type="number"
-                    min="1"
-                    value={quantities[product.id] || 1}
-                    onChange={(e) =>
-                      handleQuantityChange(product.id, e.target.value)
-                    }
-                  />
-                  <button
-                    className="btn btn-cart"
-                    onClick={() =>
-                      handleAddToCart(product, quantities[product.id] || 1)
-                    }
-                  >
-                    Aggiungi al carrello
-                  </button>
-                </div>
-              </div>
-
-              <div className="featured-image">
-                <div className="featured-image-content flex">
-                  {product.promotion_price > 0 &&
-                    product.promotion_price < product.price && (
-                      <p>
-                        -{(product.price - product.promotion_price).toFixed(2)}€
-                      </p>
-                    )}
+              <Link to={`/products/${product.slug}`}>
+                <button className="btn btn-hover">
                   <img
-                    src={product.thumbnail_url}
-                    alt={product.name}
-                    id="featured-product-image"
+                    src="/assets/img/folders/folder-search.png"
+                    alt="Folder search"
                   />
-                </div>
+                  Guarda il prodotto
+                </button>
+              </Link>
+              <div className="cart-controls">
+                <button
+                  className="btn btn-cart"
+                  onClick={() =>
+                    handleAddToCart(product, quantities[product.id] || 1)
+                  }
+                >
+                  Aggiungi al carrello
+                </button>
               </div>
             </div>
-          </Card>
-        ))
-      ) : (
-        <p>Nessun prodotto trovato.</p>
-      )}
+          ))}
+        </div>
+      </Card>
     </div>
   );
 }
